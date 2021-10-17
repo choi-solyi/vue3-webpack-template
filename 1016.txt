@@ -1,0 +1,64 @@
+@webpack
+
+npm init -y
+npm i -D webpack webpack-cli webpack-dev-server@next
+
+패키지.json 에 다음 추가
+  "scripts": {
+    "dev": "webpack-dev-server --mode development",
+    "build": "webpack --mode production"
+  },
+
+parcel과는 다르게 webpack.config.js 파일 생성 후  구성 설정을 추가해줘야한다.
+html 경로 추가
+npm i -D html-webpack-plugin
+
+static img 추가
+npm i -D copy-webpack-plugin
+
+css 읽는 모듈 추가
+npm i -D css-loader style-loader
+
+css -> scss
+npm i -D sass-loader sass
+
+@autoprefixer : 어떤 브라우저에 적용할것인지
+npm i -D postcss autoprefixer postcss-loader
+webpack 플러그인-모듈 내용 변경
+package.json에 browserslist 추가
+.postcssrc.js 파일 생성 후 다음 추가
+module.exports = {
+    plugins: [
+        require('autoprefixer')
+    ]
+}
+
+@babel : ES6 이전버전에서도 호환이 되도록 도와주는 
+npm i -D @babel/core @babel/preset-env @bable/plugin-transform-runtime
+npm i -D babel-loader
+.postcssrc.js 파일 생성 후 다음 추가
+module.exports = {
+    plugins: [
+        require('autoprefixer')
+    ]
+}
+
+
+@ Netlify 배포
+차이점 약간다름
+
+build command -> npm run build
+publish directory -> dist/
+
+
+babel 관련 오류가 발생하여 서버 배포에 실패했다.
+참고site : https://github.com/babel/babel/issues/8599
+npm install --save-dev babel-loader@7 babel-core babel-preset-env webpack webpack-cli -D
+https://www.inflearn.com/questions/31941
+
+
+scripts build webpack mode production
+
+https://wotres.tistory.com/entry/webpack-error-%ED%95%B4%EA%B2%B0%EB%B2%95-WARNING-in-configurationThe-mode-option-has-not-been-set-webpack-will-fallback-to-production-for-this-value-Set-mode-option-to-development-or-production-to-enable-defaults-for-each-environment
+
+https://a-tothe-z.tistory.com/9
